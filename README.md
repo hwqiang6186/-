@@ -82,18 +82,9 @@
   ```
     List<Apple> redAndHeavyApples = filterApples(appleList, (Apple apple) -> red".equals(apple.getColor()) && apple.getWeight() > 150);
  ```
-   
-   
-   
-   
-   
-   
-   
-   
-  
-      
-      
-  
- 
-  
-  
+
+####  2.Lamda表达式  
+##### 函数式接口 ：函数式接口就是值定义一个抽象方法的接口。  
+##### 函数式接口可以干什么？ Lambda表达式允许你直接以内联的形式为函数式接口的抽象方法提供实现，并把整个表达式作为函数式接口的实例（具体来说，是函数式接口具体实现的实例）。  
+  **函数描述符**：确定传参和返回值类型，即抽象方法的签名。  
+  1）**Predidate**
