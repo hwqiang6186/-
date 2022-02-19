@@ -32,14 +32,18 @@
   勉强应付了需求，如果需求又增加了，要筛选形状，产地，大小等属性，或者更复杂的查询，怎么办？
   **需要更高层次的抽象：对选择标准建模**：我们考虑的是苹果，需要根据apple的某些属性来返回一个Boolean值，我们称之为“谓词”。  
   我们定义一个接口：
-      `public interface ApplePredicate{
+   ```
+      public interface ApplePredicate{
            boolean test (Apple apple)
-      }`  
- 现在，就可以用ApplePredicate的多个实现代表不同的选择标准了：比如：  
-   `public class AppleHeavyWeightPredicate implements ApplePredicate {  
+      }  
+   ```
+ 现在，就可以用ApplePredicate的多个实现代表不同的选择标准了：比如：
+   ```
+   public class AppleHeavyWeightPredicate implements ApplePredicate {  
        public boolean test(Apple apple){  
          return apple.getWeight() > 150;  
-    }`  
+   }
+   ```
    至于如何利用ApplePredicate的不同实现呢？**需要给filterApples方法添加一个参数，让它接受ApplePredicate对象。  
    利用ApplePredicate修改过后，filter方法看起来是这样的： 
    ```
