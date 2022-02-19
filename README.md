@@ -17,7 +17,7 @@
       .add(apple)  
   }  
 2. 如果又有新的需求：如果能区分苹果的重量就好了，比如筛选重量大于150克的苹果。OK，重新写一个方法：  
-   List<Apple> filterApplesByWeight(List<Apple> appleList, *int weight*){  
+   List<Apple> filterApplesByWeight(List<Apple> appleList, int weight){  
      **if(apple.getWeight() > weight)**  
       .add(apple)  
   }    
@@ -27,7 +27,7 @@
    List<Apple> filterApples(List<Apple> appleList, *String color, int weight, boolean flag*){  
      if((flag &&  color.equals(apple.getColor()) ||  
           !flag && apple.getWeight() > weight))
-      .add(apple)  
+      xx.add(apple)  
   }  
    ```
 4. 以上方法是可行，但是真的很笨拙。  调用时：  List<Apple> greenApples = filterApples(appleList, "green", 100, true);  
@@ -60,6 +60,27 @@
          return result;  
     }  
    ```
+   **用法：**
+   ```
+   public class AppleRedAndHeavyPredicate implements ApplePredicate{
+		public boolean test(Apple apple){
+			return "red".equals(apple.getColor()) && apple.getWeight() > 150;
+		}
+	}
+   List<Apple> redAndHeavyApples = filterApples(appleList, new AppleRedAndHeavyPredicate());
+   ```
+ 5.但是说实话，以上的方法，使用的时候都要实现一个类？太麻烦，简化方法-**匿名类**
+   ```
+   List<Apple> redAndHeavyApples = filterApples(appleList, new ApplePredicate(){
+      public boolean test(Apple apple){
+			return "red".equals(apple.getColor()) && apple.getWeight() > 150;
+		}
+   })
+   ```
+ 6. 以上代码还是太啰嗦了，优化：**使用Lambde表达式**
+  ```
+    List<Apple> redAndHeavyApples = filterApples(appleList, (Apple apple) -> red".equals(apple.getColor()) && apple.getWeight() > 150);
+ ```
    
    
    
