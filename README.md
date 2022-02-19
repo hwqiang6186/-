@@ -22,12 +22,14 @@
       .add(apple)  
   }    
 3.以上，解决方案不错，但是复制了大部分代码，有点令人失望。如果某一天需要改变变量方法提升性能，所有的方法都得修改，代价太大。  
-  所有，写一个总的筛选方法,并加上一个标志来区分对颜色和重量的查询：  
+  所有，写一个总的筛选方法,并加上一个标志来区分对颜色和重量的查询：
+   ```
    List<Apple> filterApples(List<Apple> appleList, *String color, int weight, boolean flag*){  
-     **if((flag &&  color.equals(apple.getColor()) ||  
-          !flag && apple.getWeight() > weight))**  
+     if((flag &&  color.equals(apple.getColor()) ||  
+          !flag && apple.getWeight() > weight))
       .add(apple)  
   }  
+   ```
 4. 以上方法是可行，但是真的很笨拙。  调用时：  List<Apple> greenApples = filterApples(appleList, "green", 100, true);  
   勉强应付了需求，如果需求又增加了，要筛选形状，产地，大小等属性，或者更复杂的查询，怎么办？
   **需要更高层次的抽象：对选择标准建模**：我们考虑的是苹果，需要根据apple的某些属性来返回一个Boolean值，我们称之为“谓词”。  
