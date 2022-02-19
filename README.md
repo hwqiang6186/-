@@ -41,8 +41,9 @@
          return apple.getWeight() > 150;  
     }`  
    至于如何利用ApplePredicate的不同实现呢？**需要给filterApples方法添加一个参数，让它接受ApplePredicate对象。  
-   利用ApplePredicate修改过后，filter方法看起来是这样的：  
-    `public static List<Apple> filterApples (List<Apple> appleList, ApplePredicate p ) {  
+   利用ApplePredicate修改过后，filter方法看起来是这样的： 
+   ```
+    public static List<Apple> filterApples (List<Apple> appleList, ApplePredicate p ) {  
        public boolean test(Apple apple){  
          List<Apple> result = new ArrayList<>();
          for(Apple apple : appleList){
@@ -51,8 +52,8 @@
             }
          }
          return result;  
-    }`  
-   
+    }  
+   ```
    
    
    
