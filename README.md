@@ -30,6 +30,7 @@
       xx.add(apple)  
   }  
    ```
+	
 4. 以上方法是可行，但是真的很笨拙。  调用时：  List<Apple> greenApples = filterApples(appleList, "green", 100, true);  
   勉强应付了需求，如果需求又增加了，要筛选形状，产地，大小等属性，或者更复杂的查询，怎么办？
   **需要更高层次的抽象：对选择标准建模**：我们考虑的是苹果，需要根据apple的某些属性来返回一个Boolean值，我们称之为“谓词”。  
@@ -39,7 +40,7 @@
            boolean test (Apple apple)
       }  
    ```
- 现在，就可以用ApplePredicate的多个实现代表不同的选择标准了：比如：
+ 现在，就可以用ApplePredicate的多个实现代表不同的选择标准了：比如：  
    ```
    public class AppleHeavyWeightPredicate implements ApplePredicate {  
        public boolean test(Apple apple){  
@@ -47,7 +48,7 @@
    }
    ```
    至于如何利用ApplePredicate的不同实现呢？**需要给filterApples方法添加一个参数，让它接受ApplePredicate对象。  
-   利用ApplePredicate修改过后，filter方法看起来是这样的： 
+   利用ApplePredicate修改过后，filter方法看起来是这样的：  
    ```
     public static List<Apple> filterApples (List<Apple> appleList, ApplePredicate p ) {  
        public boolean test(Apple apple){  
@@ -60,7 +61,7 @@
          return result;  
     }  
    ```
-   **用法：**
+   **用法：**  
    ```
    public class AppleRedAndHeavyPredicate implements ApplePredicate{
 		public boolean test(Apple apple){
@@ -69,19 +70,18 @@
 	}
    List<Apple> redAndHeavyApples = filterApples(appleList, new AppleRedAndHeavyPredicate());
    ```
- 5.但是说实话，以上的方法，使用的时候都要实现一个类？太麻烦，简化方法-**匿名类**
+ 5.但是说实话，以上的方法，使用的时候都要实现一个类？太麻烦，简化方法-**匿名类**  
    ```
    List<Apple> redAndHeavyApples = filterApples(appleList, new ApplePredicate(){
       public boolean test(Apple apple){
 			return "red".equals(apple.getColor()) && apple.getWeight() > 150;
 		}
-   })
+   })  
    ```
- 6. 以上代码还是太啰嗦了，优化：**使用Lambde表达式**
+ 6. 以上代码还是太啰嗦了，优化：**使用Lambde表达式**  
   ```
     List<Apple> redAndHeavyApples = filterApples(appleList, (Apple apple) -> red".equals(apple.getColor()) && apple.getWeight() > 150);
  ```
-   
    
    
    
