@@ -87,4 +87,42 @@
 ##### 函数式接口 ：函数式接口就是值定义一个抽象方法的接口。  
 ##### 函数式接口可以干什么？ Lambda表达式允许你直接以内联的形式为函数式接口的抽象方法提供实现，并把整个表达式作为函数式接口的实例（具体来说，是函数式接口具体实现的实例）。  
   **函数描述符**：确定传参和返回值类型，即抽象方法的签名。  
-  1）**Predidate**
+  1）**Predidate**  :它接受泛型T对象，并返回boolean,当需要表示一个涉及类型T的布尔表达式时，可以使用这个接口。
+  ```
+  public interface Predicate<T>{
+	  boolean test(T t);
+  }
+  ```
+  2)**Consumer** : 定义了一个accept的抽象方法，它接受泛型T对象，并没有返回（void），如果需要访问类型T对象，并对其执行某些操作，可以使用该接口。  
+  ```
+  public interface Consumer<T>{
+	  void accept(T t);
+  }
+  ```
+  3）**Function** ：定义了一个apply的抽象方法，它接受泛型T对象，并返回一个泛型R对象。如果你需要定义一个Lambda，将输入信息映射到输出，就可以使用这个接口。
+  ```
+  public interface Function<T,R>{
+	  void accept(T t);
+  }
+  ```
+  同时，为了避免在输入输出时自动装箱（消耗内存），Java8也提供了以上接口的专门版本。例如：IntPredicate，DoublePredicate，IntConsumer...等  
+  
+  类型推到：例子：  
+  ```
+  Comparator<Apple> c = (Apple a1, Apple a2) -> a1.getWeight().comparaTo(a2.getWeight());
+  Comparator<Apple> c = (a1, a2) -> a1.getWeight().comparaTo(a2.getWeight());
+  ```
+  方法引用：  
+  先前：  
+  ```
+   appleList.sort((Apple a1, Apple a2) -> a1.getWeight().comparaTo(a2.getWeight()));
+  ```
+  之后：
+  ```
+   appleList.sort(Comparator.comparing(Apple::getWeight));
+  ```
+  其他方法：
+  1)逆序：reversed();
+  2)比较器链：thenComparing
+  3)复合谓词：表示 非： negate(); and(); or();
+  
