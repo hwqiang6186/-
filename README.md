@@ -107,7 +107,7 @@
   ```
   同时，为了避免在输入输出时自动装箱（消耗内存），Java8也提供了以上接口的专门版本。例如：IntPredicate，DoublePredicate，IntConsumer...等  
   
-  类型推到：例子：  
+  类型推导：例子：  
   ```
   Comparator<Apple> c = (Apple a1, Apple a2) -> a1.getWeight().comparaTo(a2.getWeight());
   Comparator<Apple> c = (a1, a2) -> a1.getWeight().comparaTo(a2.getWeight());
@@ -121,8 +121,8 @@
   ```
    appleList.sort(Comparator.comparing(Apple::getWeight));
   ```
-  其他方法：
+  **其他方法：**
   1)逆序：reversed();
   2)比较器链：thenComparing
-  3)复合谓词：表示 非： negate(); and(); or();
+  3)复合谓词：表示 非:negate();  and();  or();
   
